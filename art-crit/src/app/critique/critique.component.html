@@ -1,13 +1,13 @@
 <table>
   <tr>
     <td colspan=2>
-      <h2>Some painting</h2> <span> by artomizer</span>
+      <h2>{{critiqueRequest.title}}</h2> <span> by {{critiqueRequest.requesterUsername}}</span>
     </td>
   </tr>
   <tr id="container">
     <td>
-      <img [src]="imageUrl" (click)="clickedImage($event)" />
-      <img *ngIf="selectedCritique?.paintover" [src]="selectedCritique?.paintover" class='paintover' />
+      <img [src]="critiqueRequest.imageUrl" (click)="clickedImage($event)" [style.opacity]="originalImageOpacity" />
+      <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' />
 
       <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
       <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
@@ -26,8 +26,9 @@
     </td>
   </tr>
   <tr style='position:absolute;top:700px;opacity:0.7;'>
+
     <td colspan=2>
-        <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+      Original image opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="originalImageOpacityChanged($event)"></mat-slider><br/>
       <b>Features to add:</b>
       <ul>
         <li>Slider to control image opacity</li>
