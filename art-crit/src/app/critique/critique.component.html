@@ -1,0 +1,46 @@
+<table>
+  <tr>
+    <td colspan=2>
+      <h2>Some painting</h2> <span> by artomizer</span>
+    </td>
+  </tr>
+  <tr id="container">
+    <td>
+      <img [src]="imageUrl" (click)="clickedImage($event)" />
+      <img *ngIf="selectedCritique?.paintover" [src]="selectedCritique?.paintover" class='paintover' />
+
+      <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
+      <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
+    </td>
+    <td>
+      <b>Critiques</b>
+      <hr />
+
+      <div *ngFor="let critique of critiques" class="critique" [class.selected]="critique.selected" (click)="clickedCritique(critique)">
+        <span class='author'>{{critique.author}}</span> <span> {{critique.age}}</span>:
+        <div [innerHTML]="formatCritiqueMessage(critique)">
+        </div>
+      </div>
+
+
+    </td>
+  </tr>
+  <tr style='position:absolute;top:700px;opacity:0.7;'>
+    <td colspan=2>
+        <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+      <b>Features to add:</b>
+      <ul>
+        <li>Slider to control image opacity</li>
+        <li>Slider to control critique overlay opacity</li>
+        <li>color picker to change from red overlays to something else</li>
+        <li>allow people to leave anonymous critiques</li>
+        <li>hover over text will make the relevant overlays more visible/hide the others</li>
+        <li>critique upvoting/downvoting/reporting</li>
+        <li>Info about the painting from the creator - medium, description, what they're looking for</li>
+        <li>Some way to make the critique bigger... maybe pop it out in a new window?</li>
+        <li>Possibly a way for the creator to upload revisions so people can see how their feedback was incorporated</li>
+        <li>Link sharing - let critiques be private so people can share out a link to their friends</li>
+      </ul>
+    </td>
+  </tr>
+</table>
