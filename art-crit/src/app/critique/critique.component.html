@@ -6,11 +6,14 @@
   </tr>
   <tr id="container">
     <td>
-      <img [src]="critiqueRequest.imageUrl" (click)="clickedImage($event)" [style.opacity]="originalImageOpacity" />
-      <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' />
-
-      <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
-      <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
+      <img #originalImage [src]="critiqueRequest.imageUrl" (click)="clickedImage($event)" [style.opacity]="originalImageOpacity" />
+      <div id="paintoverContainer" [style.width.px]="paintoverContainerWidth">
+        <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" />
+      </div>
+      <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.opacity]="overlayOpacity" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
+      <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.opacity]="overlayOpacity" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
+      <br/>
+      <mat-slider *ngIf="selectedCritique?.paintoverUrl" id="paintoverSlider" min="0" max="100" value="100" tickInterval="1" (input)="paintoverSliderChanged($event)"></mat-slider>
     </td>
     <td>
       <b>Critiques</b>
@@ -22,17 +25,18 @@
         </div>
       </div>
 
-
+      <button mat-raised-button (click)="openAddCritiqueDialog()">Add Critique</button>
     </td>
   </tr>
   <tr style='position:absolute;top:700px;opacity:0.7;'>
 
-    <td colspan=2>
+    <td colspan=1>
+      <br/>
       Original image opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="originalImageOpacityChanged($event)"></mat-slider><br/>
+      Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider><br/>
+      
       <b>Features to add:</b>
       <ul>
-        <li>Slider to control image opacity</li>
-        <li>Slider to control critique overlay opacity</li>
         <li>color picker to change from red overlays to something else</li>
         <li>allow people to leave anonymous critiques</li>
         <li>hover over text will make the relevant overlays more visible/hide the others</li>

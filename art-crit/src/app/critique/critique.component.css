@@ -49,6 +49,19 @@ td {
     top: 3px;
 }
 
+#paintoverSlider {
+    width: 100%;
+}
+
 mat-slider {
     width: 300px;
+}
+
+#paintoverContainer {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0%;
+    height: 100%;
+    overflow-x: hidden;
 }

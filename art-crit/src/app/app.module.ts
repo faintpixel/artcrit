@@ -6,18 +6,25 @@ import { CritiqueComponent } from './critique/critique.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import { CreateCritiqueComponent } from './create-critique/create-critique.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CritiqueComponent
+    CritiqueComponent,
+    CreateCritiqueComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CreateCritiqueComponent
+  ]
 })
 export class AppModule { }

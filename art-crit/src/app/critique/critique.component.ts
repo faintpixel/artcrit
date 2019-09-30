@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CritiqueRequest } from '../models/critiqueRequest';
 import { CritiqueService } from '../critique.service';
 import { Critique } from '../models/critique';
+import { CreateCritiqueComponent } from '../create-critique/create-critique.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-critique',
@@ -10,14 +12,18 @@ import { Critique } from '../models/critique';
 })
 export class CritiqueComponent implements OnInit {
 
+  @ViewChild('originalImage', { read: ViewContainerRef }) public originalImage;
+
   public indicatorPosition = 'absolute';
   public selectedCritique = null;
   public originalImageOpacity = 1.0;
+  public overlayOpacity = 1.0;
+  public paintoverContainerWidth = 0;
 
   public critiqueRequest: CritiqueRequest;
   public critiques: Array<Critique>;
 
-  constructor(private critiqueService: CritiqueService) {
+  constructor(private critiqueService: CritiqueService, public dialog: MatDialog) {
     this.critiqueRequest = critiqueService.getRequest('test'); // TO DO - get id from URL
     this.critiques = critiqueService.getCritiques(this.critiqueRequest.id);
   }
@@ -57,6 +63,26 @@ export class CritiqueComponent implements OnInit {
 
   public originalImageOpacityChanged(e) {
     this.originalImageOpacity = e.value / 100;
+  }
+
+  public overlayOpacityChanged(e) {
+    this.overlayOpacity = e.value / 100;
+  }
+
+  public paintoverSliderChanged(e) {
+    this.paintoverContainerWidth = (e.value / 100) * this.originalImage.element.nativeElement.clientWidth;
+  }
+
+  public openAddCritiqueDialog() {
+    const dialogRef = this.dialog.open(CreateCritiqueComponent, {
+      width: '600px',
+      data: { critique: this.critiqueRequest }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
 
 }
