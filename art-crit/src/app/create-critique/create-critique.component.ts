@@ -2,6 +2,8 @@ import { Component, OnInit, Inject, ViewChild, ViewContainerRef } from '@angular
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Critique } from '../models/critique';
 import { QuillModule } from 'ngx-quill';
+import { Indicator } from '../models/indicator';
+import * as Quill from 'quill';
 
 @Component({
   selector: 'app-create-critique',
@@ -12,7 +14,6 @@ export class CreateCritiqueComponent implements OnInit {
 
   private quill: any;
 
-  public critique: Critique;
   public critiqueText = '';
   public quillConfig = {
     toolbar: [['bold', 'italic', 'underline', 'strike', 'link', 'blockquote', 'clean'], [{ 'list': 'ordered'}, { 'list': 'bullet' }]]
@@ -22,16 +23,14 @@ export class CreateCritiqueComponent implements OnInit {
   // https://github.com/KillerCodeMonkey/ngx-quill
   // https://quilljs.com/guides/how-to-customize-quill/
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<CreateCritiqueComponent>) {
-    console.log(data);
-    this.critique = data.critique;
+  constructor() {
+    
   }
 
   ngOnInit() {
   }
 
   public save() {
-    this.dialogRef.close();
     console.log(this.critiqueText);
   }
 
@@ -41,12 +40,44 @@ export class CreateCritiqueComponent implements OnInit {
 
   public quillCreated(instance) {
     this.quill = instance;
+    const Block = Quill.import('blots/block');
+    const Inline = Quill.import('blots/inline');
+    const BlockEmbed = Quill.import('blots/block/embed');
+
+    class IndicatorBlot extends BlockEmbed  {
+      static create(value) {
+        const node = super.create();
+        node.setAttribute('data.x', value.x);
+        node.setAttribute('data.y', value.y);
+        node.value = '1';
+        return node;
+      }
+
+      static value(node) {
+        return {
+          datax: node.getAttribute('data.x'),
+          datay: node.getAttribute('data.y')
+        };
+      }
+    }
+    (IndicatorBlot as any).blotName = 'indicator';
+    (IndicatorBlot as any).tagName = 'div';
+    (IndicatorBlot as any).className = 'q-ind';
+
+
+    Quill.register(IndicatorBlot);
   }
 
-  public clickedOnImage(e) {
-    const x = e.offsetX;
-    const y = e.offsetY;
-    this.quill.insertText(0, 'Test', { bold: true });
+  public addIndicator(indicator: Indicator) {
+    const range = this.quill.getSelection(true);
+    // quill.insertText(range.index, '\n', Quill.sources.USER);
+    this.quill.insertEmbed(range.index + 1, 'indicator', {
+      x: indicator.x,
+      y: indicator.y
+    }, Quill.sources.USER);
+    this.quill.setSelection(range.index + 2, Quill.sources.SILENT);
+
+    // this.quill.insertText(0, ':$ind(' + indicator.value + ',' + indicator.x + ',' + indicator.y + ')$:', { indicator: true });
   }
 
 }

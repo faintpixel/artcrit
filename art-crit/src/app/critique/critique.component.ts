@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class CritiqueComponent implements OnInit {
 
   @ViewChild('originalImage', { read: ViewContainerRef }) public originalImage;
+  @ViewChild('editor') public editor: CreateCritiqueComponent;
 
   public indicatorPosition = 'absolute';
   public selectedCritique = null;
@@ -32,7 +33,18 @@ export class CritiqueComponent implements OnInit {
   }
 
   public clickedImage(e) {
-    console.log(e);
+    const x = e.offsetX - 10;
+    const y = e.offsetY - 12;
+    console.log('x: ' + x + ', y: ' + y);
+
+    if (this.selectedCritique.indicators == null) {
+      this.selectedCritique.indicators = [];
+    }
+    const indicator = { value: this.selectedCritique.indicators.length + 1, x: x, y: y };
+    this.selectedCritique.indicators.push(indicator);
+
+    console.log(this.editor);
+    this.editor.addIndicator(indicator);
   }
 
   public clickedCritique(critique) {
@@ -71,19 +83,6 @@ export class CritiqueComponent implements OnInit {
 
   public paintoverSliderChanged(e) {
     this.paintoverContainerWidth = (e.value / 100) * this.originalImage.element.nativeElement.clientWidth;
-  }
-
-  public openAddCritiqueDialog() {
-    const dialogRef = this.dialog.open(CreateCritiqueComponent, {
-      width: '1500px',
-      height: '800px',
-      data: { critique: this.critiqueRequest }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
   }
 
 }
