@@ -75,7 +75,8 @@ export class CritiqueComponent implements OnInit {
 
   public openAddCritiqueDialog() {
     const dialogRef = this.dialog.open(CreateCritiqueComponent, {
-      width: '600px',
+      width: '1500px',
+      height: '800px',
       data: { critique: this.critiqueRequest }
     });
 

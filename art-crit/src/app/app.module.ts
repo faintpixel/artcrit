@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CreateCritiqueComponent } from './create-critique/create-critique.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/Forms';
+
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { CreateCritiqueComponent } from './create-critique/create-critique.compo
     BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
