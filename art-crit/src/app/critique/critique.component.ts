@@ -4,6 +4,7 @@ import { CritiqueService } from '../critique.service';
 import { Critique } from '../models/critique';
 import { CreateCritiqueComponent } from '../create-critique/create-critique.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Indicator } from '../models/indicator';
 
 @Component({
   selector: 'app-critique',
@@ -83,6 +84,22 @@ export class CritiqueComponent implements OnInit {
 
   public paintoverSliderChanged(e) {
     this.paintoverContainerWidth = (e.value / 100) * this.originalImage.element.nativeElement.clientWidth;
+  }
+
+  public indicatorsModified(e) {
+    if (e.length === this.selectedCritique.indicators.length) {
+      return;
+    }
+    let i = 1;
+    const newIndicators = [];
+    for (const indicator of this.selectedCritique.indicators) {
+      if (e.indexOf(indicator.value) !== -1) {
+        indicator.value = i;
+        newIndicators.push(indicator);
+        i++;
+      }
+    }
+    this.selectedCritique.indicators = newIndicators;
   }
 
 }

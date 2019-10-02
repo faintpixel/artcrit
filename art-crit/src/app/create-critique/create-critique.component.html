@@ -1,12 +1,12 @@
 <div class="editor">
-    <quill-editor (onEditorCreated)="quillCreated($event)" (onContentChanged)="contentChanged($event)" [modules]="quillConfig"></quill-editor>
+    <quill-editor id="editor" (onEditorCreated)="quillCreated($event)" (onContentChanged)="contentChanged($event)" [modules]="quillConfig"></quill-editor>
 </div>
 
 <div>
   Preview:<br/>
   {{critiqueText}}
 </div>
-
+<br/><br/><br/>
 <div>
-  <button (click)="save()">Save</button>
+  <button (click)="test()">Save</button>
 </div>
