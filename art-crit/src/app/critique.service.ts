@@ -15,7 +15,8 @@ export class CritiqueService {
       imageUrl: 'https://i.imgur.com/xM2isIv.png',
       requesterUsername: 'artomizer',
       title: 'Some Painting',
-      description: ''
+      description: '',
+      nsfw: false
     };
   }
 

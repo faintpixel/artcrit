@@ -42,7 +42,7 @@ export class CritiqueComponent implements OnInit {
       this.selectedCritique.indicators = [];
     }
     const indicator = { value: this.selectedCritique.indicators.length + 1, x: x, y: y };
-    this.selectedCritique.indicators.push(indicator);
+    // this.selectedCritique.indicators.push(indicator);
 
     console.log(this.editor);
     this.editor.addIndicator(indicator);
@@ -86,20 +86,21 @@ export class CritiqueComponent implements OnInit {
     this.paintoverContainerWidth = (e.value / 100) * this.originalImage.element.nativeElement.clientWidth;
   }
 
-  public indicatorsModified(e) {
-    if (e.length === this.selectedCritique.indicators.length) {
-      return;
-    }
-    let i = 1;
-    const newIndicators = [];
-    for (const indicator of this.selectedCritique.indicators) {
-      if (e.indexOf(indicator.value) !== -1) {
-        indicator.value = i;
-        newIndicators.push(indicator);
-        i++;
-      }
-    }
-    this.selectedCritique.indicators = newIndicators;
+  public indicatorsModified(indicators: Array<Indicator>) {
+    this.selectedCritique.indicators = indicators;
+    // if (e.length === this.selectedCritique.indicators.length) {
+    //   return;
+    // }
+    // let i = 1;
+    // const newIndicators = [];
+    // for (const indicator of this.selectedCritique.indicators) {
+    //   if (e.indexOf(indicator.value) !== -1) {
+    //     indicator.value = i;
+    //     newIndicators.push(indicator);
+    //     i++;
+    //   }
+    // }
+    // this.selectedCritique.indicators = newIndicators;
   }
 
 }

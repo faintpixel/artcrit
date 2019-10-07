@@ -12,7 +12,7 @@ import * as Quill from 'quill';
 })
 export class CreateCritiqueComponent implements OnInit {
 
-  @Output() indicatorsModified = new EventEmitter<Number[]>();
+  @Output() indicatorsModified = new EventEmitter<Indicator[]>();
 
   private quill: any;
 
@@ -37,10 +37,8 @@ export class CreateCritiqueComponent implements OnInit {
   }
 
   public contentChanged(e) {
-    
+    this.reNumberIndicators(); // this seems stupidly inefficient to do it this way
     this.critiqueText = e.html;
-    // this seems stupidly inefficient to do it this way
-    this.reNumberIndicators();
   }
 
   public quillCreated(instance) {
@@ -76,12 +74,14 @@ export class CreateCritiqueComponent implements OnInit {
 
   public addIndicator(indicator: Indicator) {
     const range = this.quill.getSelection(true);
-    // quill.insertText(range.index, '\n', Quill.sources.USER);
-    this.quill.insertEmbed(range.index + 1, 'indicator', {
+    console.log('inserting blot at ' + range.index);
+    // this.quill.insertText(range.index, '\n', Quill.sources.USER);
+    this.quill.insertEmbed(range.index, 'indicator', {
       value: indicator.value,
       x: indicator.x,
       y: indicator.y
     }, Quill.sources.USER);
+    // this.quill.insertText(range.index + 1, ' ', Quill.sources.USER);
     this.quill.setSelection(range.index + 2, Quill.sources.SILENT);
 
     //this.quill.insertText(0, '1', { indicator: true, x: 4, y: 1 });
@@ -92,17 +92,21 @@ export class CreateCritiqueComponent implements OnInit {
     if (nodes.length === 0) {
       return;
     }
-    const existingOldIds = [];
+    const allIndicators = [];
     let i = 1;
     for (const node of nodes) {
       const indicator = Quill.find(node);
-      console.log(indicator);
-      existingOldIds.push(Number(indicator.domNode.innerHTML));
+      const indicatorObject: Indicator = {
+        value: Number(indicator.domNode.innerHTML),
+        x: Number(indicator.domNode.getAttribute('data.x')),
+        y: Number(indicator.domNode.getAttribute('data.y')),
+      };
+      allIndicators.push(indicatorObject);
       indicator.domNode.innerHTML = i;
       i++;
     }
 
-    this.indicatorsModified.emit(existingOldIds);
+    this.indicatorsModified.emit(allIndicators);
   }
 
   public test() {
