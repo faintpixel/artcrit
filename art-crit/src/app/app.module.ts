@@ -8,13 +8,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CreateCritiqueComponent } from './create-critique/create-critique.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/Forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/Forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { QuillModule } from 'ngx-quill';
 import { CreateCritiqueRequestComponent } from './create-critique-request/create-critique-request.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MaterialModule } from './material-module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const appRoutes: Routes = [
   // { path: 'critiques/:id', component: ViewCritiquesComponent },
@@ -40,9 +46,11 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatDialogModule,
+    MaterialModule,
+
     QuillModule.forRoot()
   ],
   providers: [],

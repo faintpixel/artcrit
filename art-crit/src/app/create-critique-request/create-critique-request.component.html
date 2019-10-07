@@ -1,3 +1,31 @@
-<p>
-  create-critique-request works!
-</p>
+<mat-card>
+  <mat-card-title>
+    Create a new request
+  </mat-card-title>
+
+  <form [formGroup]="createForm">
+    <mat-form-field>
+      <input formControlName="title" matInput placeholder='Title'>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="imageUrl" matInput placeholder='Direct link to your image'>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="referenceUrl" matInput placeholder='Direct link to a reference image (Optional)'>
+      <mat-hint>Linking a reference image here will allow people to see what you were aiming for.</mat-hint>
+    </mat-form-field>
+    <mat-checkbox formControlName="nsfw">NSFW</mat-checkbox>
+
+    <mat-form-field>
+      <input formControlName="description" matInput placeholder="Description/What sort of feedback you're looking for.">
+      <mat-hint>What do you think went well/needs improvement? How can we help?</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="mediums" matInput placeholder='Medium(s) (optional)'>
+    </mat-form-field>
+    <mat-checkbox formControlName="isPublic">Make this critique request public</mat-checkbox>
+
+  </form>
+  <br />
+  <button mat-flat-button color="primary" (click)="createRequest()">Create!</button>
+</mat-card>
