@@ -4,4 +4,5 @@ export class CritiqueRequest {
     public requesterUsername: string;
     public title: string;
     public description: string;
+    public nsfw: boolean;
 }

@@ -35,7 +35,7 @@
       Original image opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="originalImageOpacityChanged($event)"></mat-slider><br/>
       Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider><br/>
       
-      <app-create-critique #editor></app-create-critique>
+      <app-create-critique #editor (indicatorsModified)="indicatorsModified($event)"></app-create-critique>
 
       <br/><br/><br/>
       <b>Features to add:</b>
