@@ -13,10 +13,11 @@ export class CritiqueService {
     return {
       id: id,
       imageUrl: 'https://i.imgur.com/xM2isIv.png',
-      requesterUsername: 'artomizer',
+      requestedByUser: 'artomizer',
       title: 'Some Painting',
       description: '',
-      nsfw: false
+      nsfw: false,
+      isPublic: true
     };
   }
 

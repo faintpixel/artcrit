@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CritiqueRequest } from '../models/critiqueRequest';
 
 @Component({
   selector: 'app-create-critique-request',
@@ -27,6 +28,6 @@ export class CreateCritiqueRequestComponent implements OnInit {
   }
 
   public createRequest() {
-
+    console.log(this.createForm.value);
   }
 }
