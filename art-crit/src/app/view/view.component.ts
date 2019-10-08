@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CritiqueRequest } from '../models/critiqueRequest';
 import { CritiqueService } from '../critique.service';
@@ -10,10 +10,13 @@ import { Critique } from '../models/critique';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+  @ViewChild('originalImage', { read: ViewContainerRef }) public originalImage;
   params: any;
   request: CritiqueRequest;
   selectedCritique = null;
   overlayOpacity = 1.0;
+  originalImageOpacity = 1.0;
+  paintoverContainerWidth = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService) { }
 
@@ -47,6 +50,18 @@ export class ViewComponent implements OnInit {
     }
     critique.selected = true;
     this.selectedCritique = critique;
+  }
+
+  public originalImageOpacityChanged(e) {
+    this.originalImageOpacity = e.value / 100;
+  }
+
+  public overlayOpacityChanged(e) {
+    this.overlayOpacity = e.value / 100;
+  }
+
+  public paintoverSliderChanged(e) {
+    this.paintoverContainerWidth = (e.value / 100) * this.originalImage.element.nativeElement.clientWidth;
   }
 
 }

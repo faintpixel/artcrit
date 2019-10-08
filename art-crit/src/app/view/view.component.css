@@ -15,7 +15,7 @@ h1 {
 }
 
 .imageContainer {
-    flex-grow: 3;
+    flex-grow: 1;
 }
 
 .imageContainer img {
@@ -23,8 +23,7 @@ h1 {
 }
 
 .sidebar {
-    flex-grow: 1;
-    flex-basis: 400px;
+    width: 400px;
 }
 
 .critique {
@@ -38,8 +37,14 @@ h1 {
     background-color: lightgray;
 }
 
+.container2 {
+    position: absolute;
+}
+
 .paintover {
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 mat-card-title {
@@ -48,4 +53,31 @@ mat-card-title {
     margin: 0;
     padding: 0;
     margin-bottom: 5px;
+}
+
+.ovearlayWidth {
+    width: 100%;
+}
+
+.indicator {
+    background-color: red;
+    color: white;
+    font-size: larger;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    position: absolute;
+    cursor: default;
+    /* left: 0px;
+    top: 0px; */
+}
+
+.box {
+    position: absolute;
+    border-width: 2px;
+    border-color: red;
+    border-style: solid;
 }
