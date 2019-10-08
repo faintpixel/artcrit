@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Critique } from './models/critique';
 import { CritiqueRequest } from './models/critiqueRequest';
+import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CritiqueService {
 
-  constructor() { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
+
+  public createCritiqueRequest(critiqueRequest: CritiqueRequest) {
+    return this.http.post<any>(environment.webAPI + 'ArtCrit/CritiqueRequests', critiqueRequest)
+    .pipe(catchError(this.errorService.handleError('Error updating reference.', 'updateReference', false)));
+  }
 
   public getRequest(id: string): CritiqueRequest {
     return {
