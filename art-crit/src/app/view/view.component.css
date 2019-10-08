@@ -1,0 +1,91 @@
+h1 {
+    padding: 0;
+    margin: 0;
+    display: inline;
+    font-size: inherit;
+}
+
+.header {
+    margin-bottom: 5px;
+}
+
+.container {
+    display: flex;
+    align-items: stretch;
+}
+
+.imageContainer {
+    flex-grow: 1;
+}
+
+.imageContainer img {
+    width: 100%;
+}
+
+.sidebar {
+    width: 400px;
+}
+
+.critique {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    padding-bottom: 10px;
+}
+
+.critique.selected {
+    background-color: lightgray;
+}
+ 
+.overlays {
+    position: absolute;
+}
+
+.paintover {
+    position: absolute;
+    /* width: 100%; */
+}
+
+mat-card-title {
+    font-size: inherit;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+.indicator {
+    background-color: red;
+    color: white;
+    font-size: larger;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    position: absolute;
+    cursor: default;
+    /* left: 0px;
+    top: 0px; */
+}
+
+.box {
+    position: absolute;
+    border-width: 2px;
+    border-color: red;
+    border-style: solid;
+}
+
+.overlayWidth {
+    width: 100%;
+}
+
+.paintoverContainer {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0%;
+    height: 100%;
+    overflow-x: hidden;
+}

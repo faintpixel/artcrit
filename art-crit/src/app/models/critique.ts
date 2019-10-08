@@ -9,4 +9,5 @@ export class Critique {
     public indicators?: Array<Indicator>;
     public paintoverUrl?: string;
     public boxes?: Array<Box>;
+    public selected?: boolean;
 }

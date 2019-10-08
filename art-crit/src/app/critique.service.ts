@@ -11,7 +11,17 @@ import { ErrorService } from './error.service';
 })
 export class CritiqueService {
 
-  constructor(private http: HttpClient, private errorService: ErrorService) { }
+  tmpRequests = [];
+
+  constructor(private http: HttpClient, private errorService: ErrorService) {
+    // tslint:disable-next-line:quotemark
+    this.tmpRequests.push({"id": "asfdasdgasa", "title": "Jax the rescue dog", "imageUrl": "https://i.imgur.com/Ua8rj8F.png", "referenceUrl": "https://imgur.com/ynoJ99c.png", "description": "This is a handsome dog named Jax.", "tags": ["Pen"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
+    // tslint:disable-next-line:quotemark
+    this.tmpRequests.push({"id": "ghfdghhgfd", "title": "Fabulist", "imageUrl": "https://imgur.com/xM2isIv.png", "referenceUrl": null, "description": "Words.", "tags": ["Pen", "Watercolour"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
+    // tslint:disable-next-line:quotemark
+    this.tmpRequests.push({"id": "zxcvaafdsas", "title": "Bluejay", "imageUrl": "https://i.imgur.com/USY34Dy.jpg", "referenceUrl": null, "description": "testing one marked as nsfw", "tags": ["Digital"], "nsfw": true, "isPublic": true, "requestedByUser": "artomizer"});
+
+   }
 
   public createCritiqueRequest(critiqueRequest: CritiqueRequest) {
     return this.http.post<any>(environment.webAPI + 'ArtCrit/CritiqueRequests', critiqueRequest)
@@ -19,27 +29,19 @@ export class CritiqueService {
   }
 
   public getRequest(id: string): CritiqueRequest {
-    return {
-      id: id,
-      imageUrl: 'https://i.imgur.com/xM2isIv.png',
-      requestedByUser: 'artomizer',
-      title: 'Some Painting',
-      description: '',
-      nsfw: false,
-      isPublic: true
-    };
+    for (const request of this.tmpRequests) {
+      if (request.id === id) {
+        const foundRequest = Object.assign({}, request);
+
+        foundRequest.critiques = this.getCritiques('dsfa');
+        return foundRequest;
+      }
+    }
+    return null;
   }
 
   public getPublicRequests(): Array<CritiqueRequest> {
-    const requests = [];
-    // tslint:disable-next-line:quotemark
-    requests.push({"title": "Jax the rescue dog", "imageUrl": "https://i.imgur.com/Ua8rj8F.png", "referenceUrl": "https://imgur.com/ynoJ99c.png", "description": "This is a handsome dog named Jax.", "tags": ["Pen"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
-    // tslint:disable-next-line:quotemark
-    requests.push({"title": "Fabulist", "imageUrl": "https://imgur.com/xM2isIv.png", "referenceUrl": null, "description": "Words.", "tags": ["Pen", "Watercolour"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
-    // tslint:disable-next-line:quotemark
-    requests.push({"title": "Bluejay", "imageUrl": "https://i.imgur.com/USY34Dy.jpg", "referenceUrl": null, "description": "testing one marked as nsfw", "tags": ["Digital"], "nsfw": true, "isPublic": true, "requestedByUser": "artomizer"});
-
-    return requests;
+    return this.tmpRequests;
   }
 
   public getCritiques(critiqueRequestId: string): Array<Critique> {

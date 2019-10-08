@@ -2,7 +2,7 @@
   <div *ngFor="let request of requests" class='request'>
     <div class='title'>{{request.title}}</div>
     <div class='artist'>by {{request.requestedByUser}}</div>
-    <img [src]="request.imageUrl" class="thumbnail">
+    <a routerLink="/view/{{request.id}}"><img [src]="request.imageUrl" class="thumbnail"></a>
     <div class='tags'>
       <mat-chip-list>
         <mat-basic-chip *ngFor="let tag of request.tags">{{tag}}</mat-basic-chip>
