@@ -36,15 +36,14 @@ h1 {
 .critique.selected {
     background-color: lightgray;
 }
-
-.container2 {
+ 
+.overlays {
     position: absolute;
 }
 
 .paintover {
     position: absolute;
-    top: 0;
-    left: 0;
+    /* width: 100%; */
 }
 
 mat-card-title {
@@ -53,10 +52,6 @@ mat-card-title {
     margin: 0;
     padding: 0;
     margin-bottom: 5px;
-}
-
-.ovearlayWidth {
-    width: 100%;
 }
 
 .indicator {
@@ -82,7 +77,11 @@ mat-card-title {
     border-style: solid;
 }
 
-#paintoverContainer {
+.overlayWidth {
+    width: 100%;
+}
+
+.paintoverContainer {
     position: absolute;
     left: 0px;
     top: 0px;

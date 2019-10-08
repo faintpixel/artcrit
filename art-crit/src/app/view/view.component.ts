@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CritiqueRequest } from '../models/critiqueRequest';
 import { CritiqueService } from '../critique.service';
@@ -9,7 +9,7 @@ import { Critique } from '../models/critique';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent implements OnInit {
+export class ViewComponent implements OnInit, AfterViewInit {
   @ViewChild('originalImage', { read: ViewContainerRef }) public originalImage;
   params: any;
   request: CritiqueRequest;
@@ -17,6 +17,7 @@ export class ViewComponent implements OnInit {
   overlayOpacity = 1.0;
   originalImageOpacity = 1.0;
   paintoverContainerWidth = 0;
+  overlayDomInfo: any = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService) { }
 
@@ -24,6 +25,20 @@ export class ViewComponent implements OnInit {
     this.params = this.route.params.subscribe(params => {
       this.loadRequest(params['id']);
     });
+  }
+
+  ngAfterViewInit() {
+  }
+
+  sizeOverlays() {
+    this.overlayDomInfo.width = this.originalImage.element.nativeElement.clientWidth;
+    this.overlayDomInfo.height = this.originalImage.element.nativeElement.clientHeight;
+    this.overlayDomInfo.left = this.originalImage.element.nativeElement.x;
+    this.overlayDomInfo.top = this.originalImage.element.nativeElement.y;
+    this.paintoverContainerWidth = this.originalImage.element.nativeElement.clientWidth;
+    console.log(this.originalImage.element);
+    console.log(this.overlayDomInfo);
+    console.log(this.originalImage.element.nativeElement.clientHeight);
   }
 
   private loadRequest(id: string) {
@@ -45,6 +60,8 @@ export class ViewComponent implements OnInit {
   }
 
   public clickedCritique(critique: Critique) {
+    this.sizeOverlays();
+
     if (this.selectedCritique != null) {
       this.selectedCritique.selected = false;
     }
