@@ -7,5 +7,5 @@ export class CritiqueRequest {
     public nsfw: boolean;
     public referenceUrl?: string;
     public isPublic: boolean;
-    public mediums?: string;
+    public tags?: Array<string>;
 }

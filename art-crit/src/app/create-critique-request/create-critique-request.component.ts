@@ -16,6 +16,8 @@ export class CreateCritiqueRequestComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+  // TO DO - move all this tag stuff to a seperate component and make it nicer.
+
   public createForm: FormGroup;
   public tagList = ['Watercolour', 'Digital', 'Pencil', 'Pen', 'Acrylic', 'Gouache', 'Oil'];
   public filteredTags: Observable<string[]>;
@@ -46,8 +48,9 @@ export class CreateCritiqueRequestComponent implements OnInit {
   }
 
   public createRequest() {
-    console.log(this.createForm.value);
-    console.log(this.selectedTags);
+    const request = Object.assign({}, this.createForm.value);
+    request.tags = Object.assign({}, this.selectedTags); // TO DO - only get the actual tag part
+    console.log(request);
   }
 
   public isPublicChanged() {

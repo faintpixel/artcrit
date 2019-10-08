@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+}
+
+.request {
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 100%;
+}
+
+.thumbnail {
+    width: 150px;
+}
+
+mat-basic-chip {
+    font-size: smaller;
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: inline-flex;
+    padding: 4px 6px;
+    border-radius: 12px;
+    align-items: center;
+    cursor: default;
+    background-color: lightblue;
+    margin: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: small;
+}
+
+.artist {
+    font-size: small;
+}

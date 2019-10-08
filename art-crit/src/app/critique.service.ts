@@ -30,6 +30,18 @@ export class CritiqueService {
     };
   }
 
+  public getPublicRequests(): Array<CritiqueRequest> {
+    const requests = [];
+    // tslint:disable-next-line:quotemark
+    requests.push({"title": "Jax the rescue dog", "imageUrl": "https://i.imgur.com/Ua8rj8F.png", "referenceUrl": "https://imgur.com/ynoJ99c.png", "description": "This is a handsome dog named Jax.", "tags": ["Pen"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
+    // tslint:disable-next-line:quotemark
+    requests.push({"title": "Fabulist", "imageUrl": "https://imgur.com/xM2isIv.png", "referenceUrl": null, "description": "Words.", "tags": ["Pen", "Watercolour"], "nsfw": null, "isPublic": true, "requestedByUser": "artomizer"});
+    // tslint:disable-next-line:quotemark
+    requests.push({"title": "Bluejay", "imageUrl": "https://i.imgur.com/USY34Dy.jpg", "referenceUrl": null, "description": "testing one marked as nsfw", "tags": ["Digital"], "nsfw": true, "isPublic": true, "requestedByUser": "artomizer"});
+
+    return requests;
+  }
+
   public getCritiques(critiqueRequestId: string): Array<Critique> {
     return [
       {
