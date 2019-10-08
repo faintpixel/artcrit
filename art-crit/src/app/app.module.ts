@@ -5,16 +5,15 @@ import { AppComponent } from './app.component';
 import { CritiqueComponent } from './critique/critique.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSliderModule } from '@angular/material/slider';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CreateCritiqueComponent } from './create-critique/create-critique.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/Forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { QuillModule } from 'ngx-quill';
 import { CreateCritiqueRequestComponent } from './create-critique-request/create-critique-request.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MaterialModule } from './material-module';
 
 const appRoutes: Routes = [
   // { path: 'critiques/:id', component: ViewCritiquesComponent },
@@ -37,12 +36,14 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatDialogModule,
+    MaterialModule,
+
     QuillModule.forRoot()
   ],
   providers: [],
