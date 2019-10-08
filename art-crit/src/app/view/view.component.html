@@ -1,0 +1,30 @@
+<mat-card>
+  <div class="header">
+      <h1>{{request.title}}</h1>
+      <span> by {{request.requestedByUser}}</span>
+  </div>
+  
+  <div class="container">
+    <div class="imageContainer">
+      <div class="container2">
+          <img [src]="request.imageUrl">
+      </div>
+      
+      <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" />
+    </div>
+    <div class="sidebar">
+      <mat-card>
+          <mat-card-title>Critiques</mat-card-title>
+          <div *ngFor="let critique of request.critiques" class="critique" [class.selected]="critique.selected" (click)="clickedCritique(critique)">
+              <span class='author'>{{critique.author}}</span> <span> {{critique.age}}</span>:
+              <div [innerHTML]="formatCritiqueMessage(critique)"></div>
+          </div>
+      </mat-card>
+      
+
+    </div>
+  </div>
+
+  <div class="bottomArea">Bottom area</div>
+
+</mat-card>

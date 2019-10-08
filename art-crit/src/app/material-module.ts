@@ -23,7 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatChipsModule, MatSliderModule, MatSlider } from '@angular/material';
+import { MatChipsModule, MatSliderModule, MatSlider, MatGridListModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -52,6 +52,7 @@ import { MatChipsModule, MatSliderModule, MatSlider } from '@angular/material';
     MatCheckboxModule,
     MatExpansionModule,
     MatSliderModule,
+    MatGridListModule,
     MatChipsModule],
   exports: [
     MatSidenavModule,
@@ -79,6 +80,7 @@ import { MatChipsModule, MatSliderModule, MatSlider } from '@angular/material';
     MatCheckboxModule,
     MatExpansionModule,
     MatSliderModule,
+    MatGridListModule,
     MatChipsModule]
 })
 export class MaterialModule {}

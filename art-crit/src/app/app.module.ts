@@ -16,9 +16,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material-module';
 import { BrowseRequestsComponent } from './browse-requests/browse-requests.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ViewComponent } from './view/view.component';
 
 const appRoutes: Routes = [
-  // { path: 'critiques/:id', component: ViewCritiquesComponent },
+  { path: 'view/:id', component: ViewComponent },
   { path: '',
     component: HomeComponent,
     pathMatch: 'full'
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     CreateCritiqueRequestComponent,
     HomeComponent,
     NotFoundComponent,
-    BrowseRequestsComponent
+    BrowseRequestsComponent,
+    ViewComponent
   ],
   imports: [
     RouterModule.forRoot(
