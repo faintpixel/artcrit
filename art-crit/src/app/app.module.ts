@@ -14,6 +14,8 @@ import { CreateCritiqueRequestComponent } from './create-critique-request/create
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material-module';
+import { BrowseRequestsComponent } from './browse-requests/browse-requests.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   // { path: 'critiques/:id', component: ViewCritiquesComponent },
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     CreateCritiqueComponent,
     CreateCritiqueRequestComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BrowseRequestsComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -43,7 +46,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-
+    HttpClientModule,
     QuillModule.forRoot()
   ],
   providers: [],

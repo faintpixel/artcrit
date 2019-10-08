@@ -1,0 +1,12 @@
+<div class="container">
+  <div *ngFor="let request of requests" class='request'>
+    <div class='title'>{{request.title}}</div>
+    <div class='artist'>by {{request.requestedByUser}}</div>
+    <img [src]="request.imageUrl" class="thumbnail">
+    <div class='tags'>
+      <mat-chip-list>
+        <mat-basic-chip *ngFor="let tag of request.tags">{{tag}}</mat-basic-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>

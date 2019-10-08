@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td colspan=2>
-      <h2>{{critiqueRequest.title}}</h2> <span> by {{critiqueRequest.requesterUsername}}</span>
+      <h2>{{critiqueRequest.title}}</h2> <span> by {{critiqueRequest.requestedByUser}}</span>
     </td>
   </tr>
   <tr id="container">
@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <button mat-raised-button (click)="openAddCritiqueDialog()">Add Critique</button>
+      <button mat-raised-button>Add Critique</button>
     </td>
   </tr>
   <tr style='position:absolute;top:700px;opacity:0.7;'>
