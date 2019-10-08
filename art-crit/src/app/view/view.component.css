@@ -81,3 +81,12 @@ mat-card-title {
     border-color: red;
     border-style: solid;
 }
+
+#paintoverContainer {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0%;
+    height: 100%;
+    overflow-x: hidden;
+}
