@@ -11,11 +11,14 @@
         <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top" (click)="clickedImage($event)">
             <div class="paintoverContainer" [style.width.px]="paintoverContainerWidth">
                 <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" />
+                <canvas #canvas id="redlineCanvas" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" ></canvas>
             </div>
+
 
             <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.border-color]="overlayColor" [style.left.px]="convertFullXToDisplayX(box.x)" [style.opacity]="overlayOpacity" [style.top.px]="convertFullYToDisplayY(box.y)" [style.width.px]="box.width" [style.height.px]="box.height"></div>
             <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.background-color]="overlayColor" [style.opacity]="overlayOpacity" [style.left.px]="convertFullXToDisplayX(indicator.x)" [style.top.px]="convertFullYToDisplayY(indicator.y)">{{indicator.value}}</div>
           
+            
         </div>
         
         <div class="imageControls">
@@ -41,6 +44,8 @@
     </div>
   </div>
 
-  <div class="bottomArea">Bottom area</div>
+  <div class="bottomArea">
+    <button (click)="toggleOverlayAddMode()">Toggle overlay add mode.</button> Current mode: {{overlayAddMode}}
+  </div>
 
 </mat-card>
