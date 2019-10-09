@@ -18,6 +18,10 @@ export class ViewComponent implements OnInit, AfterViewInit {
   originalImageOpacity = 1.0;
   paintoverContainerWidth = 0;
   overlayDomInfo: any = {};
+  private fullWidth = 0;
+  private fullHeight = 0;
+  private overlaysSized = false;
+  refresh = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService) { }
 
@@ -30,15 +34,63 @@ export class ViewComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
+  public clickedImage(e) {
+    this.sizeOverlays();
+    const x = this.convertDisplaySizeToFullSize(e.offsetX, this.overlayDomInfo.width, this.fullWidth);
+    const y = this.convertDisplaySizeToFullSize(e.offsetY, this.overlayDomInfo.height, this.fullHeight);
+
+    if (this.selectedCritique == null) {
+      this.selectedCritique = {};
+    }
+    if (this.selectedCritique.indicators == null) {
+      this.selectedCritique.indicators = [];
+    }
+    const indicator = { value: this.selectedCritique.indicators.length + 1, x: x, y: y };
+    console.log(indicator);
+    this.selectedCritique.indicators.push(indicator);
+
+    console.log(e);
+  }
+
+  onResize(e) {
+    this.refresh = true;
+    this.sizeOverlays();
+    this.refresh = false;
+    console.log('resized');
+  }
+
+  private convertDisplaySizeToFullSize(display: number, maxDisplay: number, full: number) {
+    const value = (display / maxDisplay) * full;
+    return value;
+  }
+
+  private convertFullXToDisplayX(x: number) {
+    console.log('triggered');
+    const value = (x / this.fullWidth) * this.overlayDomInfo.width;
+    return value;
+  }
+
+  private convertFullYToDisplayY(y: number) {
+    const value = (y / this.fullHeight) * this.overlayDomInfo.height;
+    return value;
+  }
+
   sizeOverlays() {
-    this.overlayDomInfo.width = this.originalImage.element.nativeElement.clientWidth;
-    this.overlayDomInfo.height = this.originalImage.element.nativeElement.clientHeight;
-    this.overlayDomInfo.left = this.originalImage.element.nativeElement.x;
-    this.overlayDomInfo.top = this.originalImage.element.nativeElement.y;
-    this.paintoverContainerWidth = this.originalImage.element.nativeElement.clientWidth;
-    console.log(this.originalImage.element);
-    console.log(this.overlayDomInfo);
-    console.log(this.originalImage.element.nativeElement.clientHeight);
+    if (!this.overlaysSized) {
+      this.overlayDomInfo.width = this.originalImage.element.nativeElement.clientWidth;
+      this.overlayDomInfo.height = this.originalImage.element.nativeElement.clientHeight;
+      this.overlayDomInfo.left = this.originalImage.element.nativeElement.x;
+      this.overlayDomInfo.top = this.originalImage.element.nativeElement.y;
+      this.paintoverContainerWidth = this.originalImage.element.nativeElement.clientWidth;
+
+      this.fullHeight = this.originalImage.element.nativeElement.naturalHeight;
+      this.fullWidth = this.originalImage.element.nativeElement.naturalWidth;
+
+      this.overlaysSized = true;
+      console.log(this.originalImage.element);
+      console.log(this.overlayDomInfo);
+      console.log(this.originalImage.element.nativeElement.clientHeight);
+    }
   }
 
   private loadRequest(id: string) {

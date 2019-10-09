@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (window:resize)="onResize($event)" *ngIf="!refresh">
   <div class="header">
       <h1>{{request.title}}</h1>
       <span> by {{request.requestedByUser}}</span>
@@ -6,15 +6,15 @@
   
   <div class="container">
     <div class="imageContainer">
-        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity">
+        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity" (click)="clickedImage($event)">
 
-        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top">
+        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top" (click)="clickedImage($event)">
             <div class="paintoverContainer" [style.width.px]="paintoverContainerWidth">
                 <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" />
             </div>
 
             <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.opacity]="overlayOpacity" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
-            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.opacity]="overlayOpacity" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
+            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.opacity]="overlayOpacity" [style.left.px]="convertFullXToDisplayX(indicator.x)" [style.top.px]="convertFullYToDisplayY(indicator.y)">{{indicator.value}}</div>
           
         </div>
         
