@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit, ApplicationRef, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CritiqueRequest } from '../models/critiqueRequest';
 import { CritiqueService } from '../critique.service';
@@ -21,9 +21,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
   private fullWidth = 0;
   private fullHeight = 0;
   private overlaysSized = false;
-  refresh = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.params = this.route.params.subscribe(params => {
@@ -53,9 +52,9 @@ export class ViewComponent implements OnInit, AfterViewInit {
   }
 
   onResize(e) {
-    this.refresh = true;
-    this.sizeOverlays();
-    this.refresh = false;
+    // ApplicationRef.tick()
+   // this.cdr.detectChanges();
+    this.sizeOverlays(true);
     console.log('resized');
   }
 
@@ -65,8 +64,9 @@ export class ViewComponent implements OnInit, AfterViewInit {
   }
 
   private convertFullXToDisplayX(x: number) {
-    console.log('triggered');
+    
     const value = (x / this.fullWidth) * this.overlayDomInfo.width;
+    console.log(x + ' -> ' + value);
     return value;
   }
 
@@ -75,8 +75,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
     return value;
   }
 
-  sizeOverlays() {
-    if (!this.overlaysSized) {
+  sizeOverlays(force?: boolean) {
+    if (!this.overlaysSized || force) {
       this.overlayDomInfo.width = this.originalImage.element.nativeElement.clientWidth;
       this.overlayDomInfo.height = this.originalImage.element.nativeElement.clientHeight;
       this.overlayDomInfo.left = this.originalImage.element.nativeElement.x;
