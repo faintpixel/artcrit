@@ -13,8 +13,8 @@
                 <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" />
             </div>
 
-            <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="convertFullXToDisplayX(box.x)" [style.opacity]="overlayOpacity" [style.top.px]="convertFullYToDisplayY(box.y)" [style.width.px]="box.width" [style.height.px]="box.height"></div>
-            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.opacity]="overlayOpacity" [style.left.px]="convertFullXToDisplayX(indicator.x)" [style.top.px]="convertFullYToDisplayY(indicator.y)">{{indicator.value}}</div>
+            <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.border-color]="overlayColor" [style.left.px]="convertFullXToDisplayX(box.x)" [style.opacity]="overlayOpacity" [style.top.px]="convertFullYToDisplayY(box.y)" [style.width.px]="box.width" [style.height.px]="box.height"></div>
+            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.background-color]="overlayColor" [style.opacity]="overlayOpacity" [style.left.px]="convertFullXToDisplayX(indicator.x)" [style.top.px]="convertFullYToDisplayY(indicator.y)">{{indicator.value}}</div>
           
         </div>
         
@@ -22,7 +22,8 @@
             <mat-slider class="overlayWidth" *ngIf="selectedCritique?.paintoverUrl" id="paintoverSlider" min="0" max="100" value="100" tickInterval="1" (input)="paintoverSliderChanged($event)"></mat-slider><br/>
 
             Original image opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="originalImageOpacityChanged($event)"></mat-slider><br/>
-            Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider>
+            Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider><br/>
+            Overlay color: <input [value]="overlayColor" [style.background]="overlayColor" [(colorPicker)]="overlayColor"/>
         </div>
             
     </div>

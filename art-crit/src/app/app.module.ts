@@ -17,6 +17,7 @@ import { MaterialModule } from './material-module';
 import { BrowseRequestsComponent } from './browse-requests/browse-requests.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ViewComponent } from './view/view.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 const appRoutes: Routes = [
   { path: 'view/:id', component: ViewComponent },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    ColorPickerModule,
     QuillModule.forRoot()
   ],
   providers: [],

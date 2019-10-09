@@ -21,6 +21,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
   private fullWidth = 0;
   private fullHeight = 0;
   private overlaysSized = false;
+  overlayColor = '#ff0000';
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService, private cdr: ChangeDetectorRef) { }
 
