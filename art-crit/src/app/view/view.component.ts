@@ -6,6 +6,7 @@ import { Critique } from '../models/critique';
 import { fromEvent } from 'rxjs';
 import { switchMap, pairwise, takeUntil } from 'rxjs/operators';
 import { OverlayAddMode } from '../models/overlayAddMode';
+import { Box } from '../models/box';
 
 @Component({
   selector: 'app-view',
@@ -29,6 +30,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
   overlayColor = '#ff0000';
   drawing = false;
   overlayAddMode = OverlayAddMode.None;
+  drawingBox = false;
+  wipBox: Box = null;
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService, private cdr: ChangeDetectorRef) { }
 
@@ -42,7 +45,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasEl.getContext('2d');
 
-    this.cx.lineWidth = 25;
+    this.cx.lineWidth = 125;
     this.cx.lineCap = 'round';
     this.cx.strokeStyle = this.overlayColor; // '#FF0000';
     this.captureEvents(canvasEl);
@@ -104,16 +107,53 @@ export class ViewComponent implements OnInit, AfterViewInit {
     if (this.selectedCritique == null) {
       this.selectedCritique = {};
     }
-    if (this.selectedCritique.indicators == null) {
-      this.selectedCritique.indicators = [];
+
+    if (this.overlayAddMode === OverlayAddMode.Box) {
+      if (this.selectedCritique.boxes == null) {
+        this.selectedCritique.boxes = [];
+      }
+
+      if (this.drawingBox) {
+        // finish the box
+        console.log('finished box');
+        this.drawingBox = false;
+        this.selectedCritique.boxes = Object.assign([], this.selectedCritique.boxes);
+        this.wipBox = null;
+      } else {
+        this.wipBox = { id: -1, x: x, y: y, width: 0, height: 0 };
+        this.selectedCritique.boxes.push(this.wipBox);
+        this.drawingBox = true;
+        console.log('started drawing a box');
+      }
     }
-    const indicator = { value: this.selectedCritique.indicators.length + 1, x: x - 16, y: y - 15 };
-    console.log(indicator);
 
     if (this.overlayAddMode === OverlayAddMode.Indicator) {
+      if (this.selectedCritique.indicators == null) {
+        this.selectedCritique.indicators = [];
+      }
+      const indicator = { value: this.selectedCritique.indicators.length + 1, x: x - 16, y: y - 15 };
+      console.log(indicator);
       this.selectedCritique.indicators.push(indicator);
     }
     console.log(e);
+  }
+
+  mouseMovedOnImage(e) {
+    if (this.drawingBox) {
+      const bounds = this.originalImage.element.nativeElement.getBoundingClientRect();
+
+      const relativeX = e.clientX - bounds.left;
+      const relativeY = e.clientY - bounds.top;
+      const x = this.convertDisplaySizeToFullSize(relativeX, this.overlayDomInfo.width, this.fullWidth);
+      const y = this.convertDisplaySizeToFullSize(relativeY, this.overlayDomInfo.height, this.fullHeight);
+
+      console.log(bounds);
+
+      this.wipBox.width = this.wipBox.x + x;
+      this.wipBox.height = this.wipBox.y + y;
+      console.log('Box is located at ' + this.wipBox.x + ', ' + this.wipBox.y + '. Mouse is at ' + x + ', ' + y + '. Calculated size is ' + this.wipBox.width + ' x ' + this.wipBox.height);
+      console.log(e);
+    }
   }
 
   onResize(e) {
@@ -131,7 +171,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
   private convertFullXToDisplayX(x: number) {
 
     const value = (x / this.fullWidth) * this.overlayDomInfo.width;
-    console.log(x + ' -> ' + value);
+    // console.log(x + ' -> ' + value);
     return value;
   }
 
@@ -206,6 +246,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
     if (this.overlayAddMode === OverlayAddMode.Indicator) {
       this.overlayAddMode = OverlayAddMode.Drawing;
     } else if (this.overlayAddMode === OverlayAddMode.Drawing) {
+      this.overlayAddMode = OverlayAddMode.Box;
+    } else if (this.overlayAddMode === OverlayAddMode.Box) {
       this.overlayAddMode = OverlayAddMode.None;
     } else if (this.overlayAddMode === OverlayAddMode.None) {
       this.overlayAddMode = OverlayAddMode.Indicator;

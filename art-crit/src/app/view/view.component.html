@@ -6,9 +6,9 @@
   
   <div class="container">
     <div class="imageContainer">
-        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity" (click)="clickedImage($event)">
+        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity" (click)="clickedImage($event)" (mousemove)="mouseMovedOnImage($event)">
 
-        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top" (click)="clickedImage($event)">
+        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top" (click)="clickedImage($event)" (mousemove)="mouseMovedOnImage($event)">
             <div class="paintoverContainer" [style.width.px]="paintoverContainerWidth">
                 <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" />
                 <canvas #canvas id="redlineCanvas" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" ></canvas>
