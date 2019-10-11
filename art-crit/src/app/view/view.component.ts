@@ -142,17 +142,14 @@ export class ViewComponent implements OnInit, AfterViewInit {
     if (this.drawingBox) {
       const bounds = this.originalImage.element.nativeElement.getBoundingClientRect();
 
-      const relativeX = e.clientX - bounds.left;
-      const relativeY = e.clientY - bounds.top;
-      const x = this.convertDisplaySizeToFullSize(relativeX, this.overlayDomInfo.width, this.fullWidth);
-      const y = this.convertDisplaySizeToFullSize(relativeY, this.overlayDomInfo.height, this.fullHeight);
+      const displayX = e.clientX - bounds.left;
+      const displayY = e.clientY - bounds.top;
 
-      console.log(bounds);
+      const boxDisplayX = this.convertFullXToDisplayX(this.wipBox.x);
+      const boxDisplayY = this.convertFullYToDisplayY(this.wipBox.y);
 
-      this.wipBox.width = this.wipBox.x + x;
-      this.wipBox.height = this.wipBox.y + y;
-      console.log('Box is located at ' + this.wipBox.x + ', ' + this.wipBox.y + '. Mouse is at ' + x + ', ' + y + '. Calculated size is ' + this.wipBox.width + ' x ' + this.wipBox.height);
-      console.log(e);
+      this.wipBox.width = displayX - boxDisplayX;
+      this.wipBox.height = displayY - boxDisplayY;
     }
   }
 
