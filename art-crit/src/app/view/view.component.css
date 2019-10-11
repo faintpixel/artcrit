@@ -89,3 +89,7 @@ mat-card-title {
     height: 100%;
     overflow-x: hidden;
 }
+
+#redlineCanvas {
+    position: absolute;
+}

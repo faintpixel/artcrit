@@ -1,3 +1,5 @@
+import { Critique } from "./critique";
+
 export class CritiqueRequest {
     public id?: string;
     public imageUrl: string;
@@ -8,4 +10,5 @@ export class CritiqueRequest {
     public referenceUrl?: string;
     public isPublic: boolean;
     public tags?: Array<string>;
+    public critiques?: Array<Critique>;
 }

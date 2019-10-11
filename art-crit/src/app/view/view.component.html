@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (window:resize)="onResize($event)">
   <div class="header">
       <h1>{{request.title}}</h1>
       <span> by {{request.requestedByUser}}</span>
@@ -6,23 +6,27 @@
   
   <div class="container">
     <div class="imageContainer">
-        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity">
+        <img #originalImage [src]="request.imageUrl" [style.opacity]="originalImageOpacity" (click)="clickedImage($event)" (mousemove)="mouseMovedOnImage($event)">
 
-        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top">
+        <div class="overlays" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" [style.top.px]="overlayDomInfo.top" (click)="clickedImage($event)" (mousemove)="mouseMovedOnImage($event)">
             <div class="paintoverContainer" [style.width.px]="paintoverContainerWidth">
                 <img *ngIf="selectedCritique?.paintoverUrl" [src]="selectedCritique?.paintoverUrl" class='paintover' [style.opacity]="overlayOpacity" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" />
+                <canvas #canvas id="redlineCanvas" [style.height.px]="overlayDomInfo.height" [style.width.px]="overlayDomInfo.width" ></canvas>
             </div>
 
-            <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.left.px]="box.x" [style.opacity]="overlayOpacity" [style.top.px]="box.y" [style.width.px]="box.width" [style.height.px]="box.height"></div>
-            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.opacity]="overlayOpacity" [style.left.px]="indicator.x" [style.top.px]="indicator.y">{{indicator.value}}</div>
+
+            <div class="box" *ngFor="let box of selectedCritique?.boxes" [style.border-color]="overlayColor" [style.left.px]="convertFullXToDisplayX(box.x)" [style.opacity]="overlayOpacity" [style.top.px]="convertFullYToDisplayY(box.y)" [style.width.px]="box.width" [style.height.px]="box.height"></div>
+            <div class="indicator" *ngFor="let indicator of selectedCritique?.indicators" [style.background-color]="overlayColor" [style.opacity]="overlayOpacity" [style.left.px]="convertFullXToDisplayX(indicator.x)" [style.top.px]="convertFullYToDisplayY(indicator.y)">{{indicator.value}}</div>
           
+            
         </div>
         
         <div class="imageControls">
             <mat-slider class="overlayWidth" *ngIf="selectedCritique?.paintoverUrl" id="paintoverSlider" min="0" max="100" value="100" tickInterval="1" (input)="paintoverSliderChanged($event)"></mat-slider><br/>
 
             Original image opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="originalImageOpacityChanged($event)"></mat-slider><br/>
-            Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider>
+            Overlay opacity: <mat-slider thumbLabel min="0" max="100" value="100" tickInterval="1" (input)="overlayOpacityChanged($event)"></mat-slider><br/>
+            Overlay color: <input [value]="overlayColor" [style.background]="overlayColor" [(colorPicker)]="overlayColor"/>
         </div>
             
     </div>
@@ -40,6 +44,8 @@
     </div>
   </div>
 
-  <div class="bottomArea">Bottom area</div>
+  <div class="bottomArea">
+    <button (click)="toggleOverlayAddMode()">Toggle overlay add mode.</button> Current mode: {{overlayAddMode}}
+  </div>
 
 </mat-card>
