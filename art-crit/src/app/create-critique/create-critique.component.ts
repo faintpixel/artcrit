@@ -13,6 +13,7 @@ import * as Quill from 'quill';
 export class CreateCritiqueComponent implements OnInit {
 
   @Output() indicatorsModified = new EventEmitter<Indicator[]>();
+  @Output() saved = new EventEmitter<string>();
 
   private quill: any;
 
@@ -34,6 +35,7 @@ export class CreateCritiqueComponent implements OnInit {
 
   public save() {
     console.log(this.critiqueText);
+    this.saved.emit(this.critiqueText);
   }
 
   public contentChanged(e) {

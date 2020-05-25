@@ -32,13 +32,29 @@
     </div>
 
     <div class="sidebar">
-      <mat-card>
-          <mat-card-title>Critiques</mat-card-title>
-          <div *ngFor="let critique of request.critiques" class="critique" [class.selected]="critique.selected" (click)="clickedCritique(critique)">
-              <span class='author'>{{critique.author}}</span> <span> {{critique.age}}</span>:
-              <div [innerHTML]="formatCritiqueMessage(critique)"></div>
-          </div>
-      </mat-card>
+
+        <mat-tab-group [selectedIndex]="tabIndex" (selectedIndexChange)="tabIndexChanged($event)">
+            <mat-tab label="Critiques">
+
+                <mat-card>
+                    <div *ngFor="let critique of request.critiques" class="critique" [class.selected]="critique.selected" (click)="clickedCritique(critique)">
+                        <span class='author'>{{critique.author}}</span> <span> {{critique.age}}</span>:
+                        <div [innerHTML]="formatCritiqueMessage(critique)"></div>
+                    </div>
+                </mat-card>
+
+            </mat-tab>
+            <mat-tab label="New">
+              
+                <mat-card>
+                    <app-create-critique (saved)="critiqueSaved($event)"></app-create-critique>
+                </mat-card>
+
+            </mat-tab>
+        </mat-tab-group>
+
+
+      
       
 
     </div>

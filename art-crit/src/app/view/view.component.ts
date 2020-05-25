@@ -32,6 +32,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
   overlayAddMode = OverlayAddMode.None;
   drawingBox = false;
   wipBox: Box = null;
+  tabIndex = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private critiqueService: CritiqueService, private cdr: ChangeDetectorRef) { }
 
@@ -249,6 +250,25 @@ export class ViewComponent implements OnInit, AfterViewInit {
     } else if (this.overlayAddMode === OverlayAddMode.None) {
       this.overlayAddMode = OverlayAddMode.Indicator;
     }
+  }
+
+  public critiqueSaved(text: string) {
+    const critique: Critique = {
+      comment: text,
+      createDate: new Date(),
+      age: 'Now',
+      indicators: null,
+      boxes: null,
+      paintoverUrl: null,
+      username: '',
+    };
+
+    this.request.critiques.unshift(critique);
+    this.tabIndex = 0;
+  }
+
+  tabIndexChanged(index: number) {
+    this.tabIndex = index;
   }
 
 }
