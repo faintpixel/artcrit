@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { CritiqueRequest } from '../models/critiqueRequest';
-import { CritiqueService } from '../critique.service';
-import { Critique } from '../models/critique';
-import { CreateCritiqueComponent } from '../create-critique/create-critique.component';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 import { Indicator } from '../models/indicator';
+import { CritiqueService } from '../critique.service';
+import { CritiqueRequest } from '../models/critiqueRequest';
+import { Critique } from '../models/critique';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateCritiqueComponent } from '../create-critique/create-critique.component';
 
 @Component({
   selector: 'app-critique',
   templateUrl: './critique.component.html',
-  styleUrls: ['./critique.component.css']
+  styleUrls: ['./critique.component.scss']
 })
 export class CritiqueComponent implements OnInit {
 

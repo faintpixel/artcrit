@@ -1,50 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CritiqueComponent } from './critique/critique.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { CreateCritiqueComponent } from './create-critique/create-critique.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-
-import { QuillModule } from 'ngx-quill';
-import { CreateCritiqueRequestComponent } from './create-critique-request/create-critique-request.component';
 import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { MaterialModule } from './material-module';
 import { BrowseRequestsComponent } from './browse-requests/browse-requests.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CreateCritiqueRequestComponent } from './create-critique-request/create-critique-request.component';
+import { CritiqueComponent } from './critique/critique.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { ViewComponent } from './view/view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material-module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateCritiqueComponent } from './create-critique/create-critique.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-
-const appRoutes: Routes = [
-  { path: 'view/:id', component: ViewComponent },
-  { path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
-  },
-  { path: '**', component: NotFoundComponent }
-];
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CritiqueComponent,
-    CreateCritiqueComponent,
-    CreateCritiqueRequestComponent,
     HomeComponent,
-    NotFoundComponent,
     BrowseRequestsComponent,
-    ViewComponent
+    CreateCritiqueRequestComponent,
+    CritiqueComponent,
+    NotFoundComponent,
+    ViewComponent,
+    CreateCritiqueComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
-    ),
     BrowserModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -54,9 +40,6 @@ const appRoutes: Routes = [
     QuillModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    CreateCritiqueComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

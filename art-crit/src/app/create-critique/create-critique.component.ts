@@ -1,17 +1,13 @@
-import { Component, OnInit, Inject, ViewChild, ViewContainerRef, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Critique } from '../models/critique';
-import { QuillModule } from 'ngx-quill';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Indicator } from '../models/indicator';
 import * as Quill from 'quill';
 
 @Component({
   selector: 'app-create-critique',
   templateUrl: './create-critique.component.html',
-  styleUrls: ['./create-critique.component.css']
+  styleUrls: ['./create-critique.component.scss']
 })
 export class CreateCritiqueComponent implements OnInit {
-
   @Output() indicatorsModified = new EventEmitter<Indicator[]>();
   @Output() saved = new EventEmitter<string>();
 

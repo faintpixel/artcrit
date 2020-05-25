@@ -1,45 +1,45 @@
 <mat-card>
-  <mat-card-title>
-    Create a new request
-  </mat-card-title>
-
-  <form [formGroup]="createForm">
-    <mat-form-field>
-      <input formControlName="title" matInput placeholder='Title'>
-    </mat-form-field>
-    <mat-form-field>
-      <input formControlName="imageUrl" matInput placeholder='Direct link to your image'>
-    </mat-form-field>
-    <mat-form-field>
-      <input formControlName="referenceUrl" matInput placeholder='Direct link to a reference image (Optional)'>
-      <mat-hint>Linking a reference image here will allow people to see what you were aiming for.</mat-hint>
-    </mat-form-field>
-    <mat-checkbox formControlName="nsfw">NSFW</mat-checkbox>
-
-    <mat-form-field>
-      <input formControlName="description" matInput placeholder="Description/What sort of feedback you're looking for.">
-      <mat-hint>What do you think went well/needs improvement? How can we help?</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-chip-list #tagList>
-          <mat-chip *ngFor="let tag of selectedTags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
-            {{tag}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="Tags" #tagInput formControlName="tags" [matAutocomplete]="auto" [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-            {{tag}}
-          </mat-option>
-        </mat-autocomplete>
+    <mat-card-title>
+      Create a new request
+    </mat-card-title>
+  
+    <form [formGroup]="createForm">
+      <mat-form-field>
+        <input formControlName="title" matInput placeholder='Title'>
       </mat-form-field>
-
-    <mat-checkbox formControlName="isPublic" (change)="isPublicChanged()">Make this critique request public</mat-checkbox>
-
-  </form>
-  <br />
-  <button mat-flat-button color="primary" (click)="createRequest()">Create!</button>
-</mat-card>
+      <mat-form-field>
+        <input formControlName="imageUrl" matInput placeholder='Direct link to your image'>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="referenceUrl" matInput placeholder='Direct link to a reference image (Optional)'>
+        <mat-hint>Linking a reference image here will allow people to see what you were aiming for.</mat-hint>
+      </mat-form-field>
+      <mat-checkbox formControlName="nsfw">NSFW</mat-checkbox>
+  
+      <mat-form-field>
+        <input formControlName="description" matInput placeholder="Description/What sort of feedback you're looking for.">
+        <mat-hint>What do you think went well/needs improvement? How can we help?</mat-hint>
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-chip-list #tagList>
+            <mat-chip *ngFor="let tag of selectedTags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+              {{tag}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Tags" #tagInput formControlName="tags" [matAutocomplete]="auto" [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+              {{tag}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  
+      <mat-checkbox formControlName="isPublic" (change)="isPublicChanged()">Make this critique request public</mat-checkbox>
+  
+    </form>
+    <br />
+    <button mat-flat-button color="primary" (click)="createRequest()">Create!</button>
+  </mat-card>

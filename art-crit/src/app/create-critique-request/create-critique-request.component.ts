@@ -1,16 +1,15 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CritiqueRequest } from '../models/critiqueRequest';
-import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-create-critique-request',
   templateUrl: './create-critique-request.component.html',
-  styleUrls: ['./create-critique-request.component.css']
+  styleUrls: ['./create-critique-request.component.scss']
 })
 export class CreateCritiqueRequestComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;

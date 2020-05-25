@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { Message } from './models/message';
 import { MessageTypes } from './models/messageTypes';
-import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ErrorService {
 
   constructor(private messageService: MessageService) { }
 
-  public handleError<T>(userMessage, operation = 'operation', result?: T) {
+  public handleError<T>(userMessage: any, operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

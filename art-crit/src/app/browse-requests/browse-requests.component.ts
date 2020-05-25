@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CritiqueService } from '../critique.service';
 import { CritiqueRequest } from '../models/critiqueRequest';
+import { CritiqueService } from '../critique.service';
 
 @Component({
   selector: 'app-browse-requests',
   templateUrl: './browse-requests.component.html',
-  styleUrls: ['./browse-requests.component.css']
+  styleUrls: ['./browse-requests.component.scss']
 })
 export class BrowseRequestsComponent implements OnInit {
   public requests: Array<CritiqueRequest>;
@@ -17,6 +17,5 @@ export class BrowseRequestsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
 }

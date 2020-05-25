@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit, ApplicationRef, ChangeDetectorRef, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CritiqueRequest } from '../models/critiqueRequest';
-import { CritiqueService } from '../critique.service';
-import { Critique } from '../models/critique';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { switchMap, pairwise, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, pairwise } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CritiqueService } from '../critique.service';
 import { OverlayAddMode } from '../models/overlayAddMode';
 import { Box } from '../models/box';
+import { CritiqueRequest } from '../models/critiqueRequest';
+import { Critique } from '../models/critique';
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit, AfterViewInit {
   @ViewChild('originalImage', { read: ViewContainerRef }) public originalImage;
@@ -166,14 +166,14 @@ export class ViewComponent implements OnInit, AfterViewInit {
     return value;
   }
 
-  private convertFullXToDisplayX(x: number) {
+  public convertFullXToDisplayX(x: number) {
 
     const value = (x / this.fullWidth) * this.overlayDomInfo.width;
     // console.log(x + ' -> ' + value);
     return value;
   }
 
-  private convertFullYToDisplayY(y: number) {
+  public convertFullYToDisplayY(y: number) {
     const value = (y / this.fullHeight) * this.overlayDomInfo.height;
     return value;
   }
