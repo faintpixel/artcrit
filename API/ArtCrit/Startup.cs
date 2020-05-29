@@ -27,8 +27,9 @@ namespace ArtCrit
 
             var environment = Configuration["Environment"];
             AppSettings.MongoDBConnection = Configuration.GetConnectionString("MongoDB." + environment);
-            AppSettings.ImgurClientId = configuration.GetConnectionString("ImgurClientId");
-            AppSettings.ImgurClientSecret = configuration.GetConnectionString("ImgurClientSecret");
+            AppSettings.ImgurClientId = Configuration.GetConnectionString("ImgurClientId");
+            AppSettings.ImgurClientSecret = Configuration.GetConnectionString("ImgurClientSecret");
+            Console.WriteLine("got config");
         }
 
         public IConfiguration Configuration { get; }

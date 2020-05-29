@@ -1,0 +1,8 @@
+﻿{
+  "ConnectionStrings": {
+    "MongoDB.dev": "mongodb://username:pw@server",
+    "MongoDB.prod": "mongodb://username:pw@server",
+    "ImgurClientId": "",
+    "ImgurClientSecret": ""
+  }
+}
