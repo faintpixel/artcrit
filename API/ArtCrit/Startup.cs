@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using ArtCrit.DAO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace ArtCrit
 {
@@ -22,6 +24,11 @@ namespace ArtCrit
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var environment = Configuration["Environment"];
+            AppSettings.MongoDBConnection = Configuration.GetConnectionString("MongoDB." + environment);
+            AppSettings.ImgurClientId = configuration.GetConnectionString("ImgurClientId");
+            AppSettings.ImgurClientSecret = configuration.GetConnectionString("ImgurClientSecret");
         }
 
         public IConfiguration Configuration { get; }

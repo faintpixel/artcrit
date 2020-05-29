@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtCrit", "ArtCrit\ArtCrit.csproj", "{DEA43CC2-6334-427A-803A-A5CFCA281B94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtCrit.DAO", "ArtCrit.DAO\ArtCrit.DAO.csproj", "{8BE97C18-5451-4BE5-BE1C-94FC190C6D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtCrit.DAO", "ArtCrit.DAO\ArtCrit.DAO.csproj", "{8BE97C18-5451-4BE5-BE1C-94FC190C6D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtCrit.Tests", "ArtCrit.Tests\ArtCrit.Tests.csproj", "{B88A5289-3FF0-4329-8652-8264380D534C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8BE97C18-5451-4BE5-BE1C-94FC190C6D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE97C18-5451-4BE5-BE1C-94FC190C6D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE97C18-5451-4BE5-BE1C-94FC190C6D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B88A5289-3FF0-4329-8652-8264380D534C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B88A5289-3FF0-4329-8652-8264380D534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B88A5289-3FF0-4329-8652-8264380D534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B88A5289-3FF0-4329-8652-8264380D534C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
